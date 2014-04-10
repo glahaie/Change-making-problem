@@ -1,0 +1,206 @@
+%dev_4.tex
+%Par Guillaume Lahaie
+%LAHG04077707
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Simple Sectioned Essay Template
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing essay content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[10.9pt]{article} % Default font size is 12pt, it can be changed here
+\renewcommand{\familydefault}{\rmdefault}
+\renewcommand{\thesubsection}{\alph{subsection}}
+
+%Pour l'encodage avec accents
+\usepackage[utf8]{inputenc}
+\usepackage{longtable}
+\usepackage{algorithm2e}
+
+%\usepackage{helvet}
+%\renewcommand{\familydefault}{\sfdefault}
+
+%Pour INF4100 - devoir 4
+\usepackage{amsfonts}
+\usepackage{mathtools}
+
+\usepackage{afterpage}
+\usepackage{appendix}
+\usepackage{graphicx} % Required for including pictures
+\usepackage{listings}
+\usepackage{mathtools}
+
+\usepackage[left=2.2cm,top=2.2cm,right=2.2cm,bottom=2.2cm,nohead]{geometry} % Required to change the page size to A4
+\geometry{letterpaper} % Set the page size to be A4 as opposed to the default US Letter
+
+\usepackage{float} % Allows putting an [H] in \begin{figure} to specify the exact location of the figure
+\linespread{1.2} % Line spacing
+
+%\setlength\parindent{0pt} % Uncomment to remove all indentation from paragraphs
+
+\graphicspath{{./Pictures/}} % Specifies the directory where pictures are stored
+\usepackage[french,english]{babel}
+
+%Comportement d'un paragraphe
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}%
+
+%Widows/orphans
+\widowpenalty10000
+\clubpenalty10000
+
+\usepackage[hidelinks]{hyperref}
+
+%Meta-info
+\title{INF4100 - devoir 4}
+\author{Guillaume Lahaie}
+\date{Remise: 18 avril 2014}
+
+\hypersetup{
+  pdftitle={INF4100 - devoir 4},
+  pdfauthor={Guillaume Lahaie}
+}
+
+\newcommand\blankpage{%
+  \null
+  \thispagestyle{empty}%
+  \addtocounter{page}{-1}%
+  \newpage}
+
+\begin{document}
+\selectlanguage{french}
+\fussy
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+
+\textsc{\LARGE Université du Québec à Montréal}\\[1.5cm] % Name of your university/college
+\textsc{\Large INF4100}\\[0.5cm] % Major heading such as course name
+
+\HRule \\[1.5cm]
+{ \huge \bfseries Devoir 4}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Par:}\\
+Guillaume Lahaie \\ LAHG04077707 % Your name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Remis à:} \\
+Louise Laforest % Supervisor's Name
+\end{flushright}
+\end{minipage}\\[4cm]
+
+{\large \emph{Date de remise:} \\ Le 18 avril 2014}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+\blankpage
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\tableofcontents % Include a table of contents
+
+\newpage % Begins the essay on a new page instead of on the same page as the table of contents 
+
+%----------------------------------------------------------------------------------------
+% SECTIONS DU DOCUMENT
+%----------------------------------------------------------------------------------------
+
+
+\section{Numéro 1.}
+
+\subsection{Valeur à C[1, j], $0\le j \le L$}
+
+
+Il y a deux valeurs possibles à C[1, j]. Soit il est possible de faire la monnaie exacte 
+avec $P_1$, soit il n'est pas possible de faire la monnaie, est donc C[1, j] est l'infini.
+
+\begin{equation}
+C[1,j] = 
+\begin{cases}
+ \frac{j}{P_1}  &\text{si } j \bmod P_1 = 0\\
+ \infty                   &\text{sinon}\\
+\end{cases}
+\end{equation}
+
+\subsection{Valeur de C[i, 0], $1 \le i \le n$}
+
+Comme la monnaie à rendre est de 0, à chaque valeur de C[i, 0] sera 0 car il n'y a pas
+de monnaie à rendre.
+
+\begin{equation}
+ C[i, 0] = 0, 1 \le i \le n
+\end{equation}
+
+\subsection{Valeur de C[i, 1], $1 \le i \le n$}
+
+Ici, la monnaie à rendre est de 1, donc on a deux valeurs possibles: soit l'ensemble de pièces
+$P_1, P_2, ... , P_i$ contient une pièce de 1 sous, la valeur est alors 1, sinon la valeur est
+l'infinie, il est impossible de rendre la monnaie.
+
+\begin{equation}
+C[i,1] = 
+\begin{cases}
+ 1  &\text{si }  1 \in P_1, P_2, ... , P_i \\
+ \infty                   &\text{sinon}\\
+\end{cases}
+\end{equation}
+
+\subsection{Tableau C pour $P = [1, 5, 10, 25]$ et $L = 25$}
+
+$C = $
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+ 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 &14 & 15 & 16 & 17 & 18 & 19 & 20 \\ \hline
+0 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 5 & 2 & 3 & 4 & 5 & 6 & 3 & 4 & 5 & 6 & 7 & 4 \\ \hline
+0 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 5 & 1 & 2 & 3 & 4 & 5 & 2 & 3 & 4 & 5 & 6 & 2 \\ \hline
+0 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 5 & 1 & 2 & 3 & 4 & 5 & 2 & 3 & 4 & 5 & 6 & 2 \\ \hline
+\end{tabular}
+
+\subsection{Équation de récurrence pour C[i, j]}
+
+\begin{equation}
+ C[i, j] = 
+ \begin{cases}
+  0 			&\text{si } j = 0 \\
+  \frac{j}{P_1} 	&\text{si } i = 1, 1 \le j \le L, j \bmod P_1 = 0 \\
+  \infty 		&\text{si } i = 1, 1 \le j \le L, j \bmod P_1 \neq 0 \\
+  C[i-1, j]		&\text{si } j < P_i \\
+  1 + min(C[i, j - P_i], C[i, j - P_{i-1}], ..., C[i, j - P_1])	&\text{sinon}
+ \end{cases}
+\end{equation}
+
+
+
+
+
+\end{document}
