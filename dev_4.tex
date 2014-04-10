@@ -269,5 +269,18 @@ Donc, l'algorithme à une complexité temporelle de $\Theta(nL)$.
     }
 \end{algorithm}
 
+\subsection{Complexité temporelle de l'algorithme précédent}
+
+On connait ici le nombre de boucles maximales pour l'algorithme: on sait qu'il y 
+a au pire $C[M]$ boucles, car il s'agit du nombre de pièces optimales de monnaie
+à rendre.
+
+On vérifie ensuite quelle pièce utilisée pour continuer d'être dans la solution
+optimale. Dans le pire cas, il faut donc tenter toutes les pièces avant de
+trouver la pièce à utiliser, donc $n$ tours de boucle.
+
+La complexité temporelle est donc $\Theta(C[M]n)$, est comme $C[M]$ est une constante,
+la complexité est donc $\Theta(n)$.
+
 
 \end{document}
