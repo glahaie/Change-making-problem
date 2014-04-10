@@ -195,12 +195,79 @@ $C = $
   \frac{j}{P_1} 	&\text{si } i = 1, 1 \le j \le L, j \bmod P_1 = 0 \\
   \infty 		&\text{si } i = 1, 1 \le j \le L, j \bmod P_1 \neq 0 \\
   C[i-1, j]		&\text{si } j < P_i \\
-  1 + min(C[i, j - P_i], C[i, j - P_{i-1}], ..., C[i, j - P_1])	&\text{sinon}
+  min(1 + C[i, j - P_i]), C[i-1, j])	&\text{sinon}
  \end{cases}
 \end{equation}
 
+\subsection{Algorithme de programmation dynamique utilisant un tableau en une dimension}
 
+Source: \url{http://www.columbia.edu/~cs2035/courses/csor4231.F07/dynamic.pdf}
 
+\begin{algorithm}
+ \SetKwInput{Fonction}{fonction}
+ \SetKwInput{Donnees}{donnees}
+ \SetKwInput{Antecedents}{antécédents}
+ \SetKwInput{Consequents}{conséquents}
+  \Fonction{monnaieOptimale ($P, L$)}
+ \Donnees{ \emph{P}: tableau des pièces de monnaie n*n indicé de 1 à $n$ \\ 
+	   \emph{L}: la monnaie à rendre}
+ \Sortie{ \emph{C}: le tableau de la monnaie optimale de 0 à $L$}
+ \Deb{
+    créer tableau $C$ de longueur $L+1$\\
+    \Pour{$i \longleftarrow 0$ à $L$}{
+      \Si{$i \bmod P[1] == 0$}{
+	$C[i] \longleftarrow i / P[1]$}
+      \Sinon{
+	$C[i] \longleftarrow \infty$}}
+    \Pour{$i \longleftarrow 2$ à $n$}{
+      \Pour{$k \longleftarrow 1$ à $L$}{
+	\Si{$k \ge P[i]$}{
+	  $C[k] \longleftarrow min(C[k-P[i]]+1, C[k])$
+	  }
+	}
+      }
+    }       
+\end{algorithm}
+
+\subsection{Complexité temporelle}
+
+La complexité dépend du nombre de pièces disponibles pour faire la monnaie, et $L$, la monnaie
+à rendre.
+
+Pour chaque valeur du tableau de $L$, on essaie de faire la monnaie avec chaque pièce.
+S'il y a $n$ pièces de monnaie disponibles, on a donc $n$ boucles pour chaque élément du
+tableau $C$.
+
+Donc, l'algorithme à une complexité temporelle de $\Theta(nL)$.
+
+\subsection{Algorithme glouton capable de faire la monnaie}
+
+\begin{algorithm}
+ \SetKwInput{Fonction}{fonction}
+ \SetKwInput{Donnees}{donnees}
+ \SetKwInput{Antecedents}{antécédents}
+ \SetKwInput{Consequents}{conséquents}
+  \Fonction{trouverChangeOptimale ($P, C, M$)}
+ \Donnees{ \emph{P}: tableau des pièces de monnaie indicé de 1 à $n$ \\ 
+	   \emph{L}: la monnaie à rendre\\
+	   \emph{C}: le tableau de la monnaie optimale de 0 à $L$}
+  \Antecedents{$M \le L$\\
+	       $P[1] \le P[2] \le ... \le P[n]$}
+ \Sortie{$S$, tableau contenant le nombre de pièces à rendre pour chaque pièce de monnaie}
+ \Deb{
+  Créer un tableau $S$ de longueur $n$, et initialiser toutes les valeurs à $0$\\
+  \Tq{$M > 0$}{
+   \Pour{$i \longleftarrow n$ bas $1$}{
+    \Si{$C[M] \ge P[n]$ et $C[M-P[i]] + 1 == C[M]$}{
+      $M \longleftarrow M - P[i]$\\
+      $S[i] \longleftarrow S[i] + 1$\\
+      break
+      }
+    }
+    }
+    \Retour{$S$}
+    }
+\end{algorithm}
 
 
 \end{document}
