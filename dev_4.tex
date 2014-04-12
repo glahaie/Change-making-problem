@@ -256,14 +256,15 @@ Donc, l'algorithme à une complexité temporelle de $\Theta(nL)$.
  \Sortie{$S$, tableau contenant le nombre de pièces à rendre pour chaque pièce de monnaie}
  \Deb{
   Créer un tableau $S$ de longueur $n$, et initialiser toutes les valeurs à $0$\\
+  $i \longleftarrow n$\\
   \Tq{$M > 0$}{
-   \Pour{$i \longleftarrow n$ bas $1$}{
-    \Si{$C[M] \ge P[n]$ et $C[M-P[i]] + 1 == C[M]$}{
+    \Si{$C[M] \ge P[i]$ et $C[M-P[i]] < C[M]$}{
       $M \longleftarrow M - P[i]$\\
       $S[i] \longleftarrow S[i] + 1$\\
-      break
       }
-    }
+    \Sinon{
+      $i \longleftarrow i - 1$
+      }
     }
     \Retour{$S$}
     }
