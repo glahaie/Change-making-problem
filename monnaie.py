@@ -114,7 +114,11 @@ def main():
 
     print "\nMontant: nombre de pièces en ordre décroissant de valeur"
     for i in Monnaies:
-        print str(i) + " : " + reduce(lambda x, y: str(x) + " " + str(y), trouverMonnaieOptimale(C, i, P))
+        S = trouverMonnaieOptimale(C, i, P)
+        if S[0] < 0:
+            print str(i) + " : Aucune solution possible"
+        else:
+            print str(i) + " : " + reduce(lambda x, y: str(x) + " " + str(y), S)
 
 if __name__ == "__main__":
         main()
