@@ -34,6 +34,7 @@ def afficherC(L, P):
                         min = temp
             C[i] = min
         #On imprime la ligne
+        C = map(lambda x: -1 if x == sys.maxint else x, C)
         print reduce(lambda x, y: x + " "+y,
                      map(lambda x: "{"+str(x)+":3}",
                          range(0, len(C)))).format(*C).strip()
@@ -56,7 +57,7 @@ def calculerC(M, P):
                         min = temp
             C[i] = min
 
-    return C
+    return map(lambda x: -1 if x == sys.maxint else x, C)
 
 
 def lireFichier(nom_fichier):
@@ -84,12 +85,12 @@ def lireFichier(nom_fichier):
 def trouverMonnaieOptimale(C, monnaie, P):
 
     S = [0]*len(P)
-    if C[monnaie] < 0 or C[monnaie] == sys.maxint:
+    if C[monnaie] < 0:
         return map(lambda x: -1, S)
     i = 0
     n = len(P)
     while monnaie > 0:
-        if (monnaie >= P[n-1-i]) and (C[monnaie] > C[monnaie - P[n-1-i]]):
+        if (monnaie >= P[n-1-i]) and (C[monnaie] - 1==  C[monnaie - P[n-1-i]] ):
             monnaie = monnaie - P[n-1-i]
             S[i] += 1
         else:
