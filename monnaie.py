@@ -20,42 +20,35 @@ import sys
 def afficherC(L, P):
     """
         Affiche toutes les lignes de l'algorithme de programmation dynamique permettant
-        de trouver le nombre de pièces optimales à rendre pour L
+        de trouver le nombre de pièces optimales à rendre pour L. Si aucune solution
+        n'est possible, la valeur -1 est affichée.
     """
-    C = [-1]*(L+1)
+    C = [sys.maxint]*(L+1)
     for j in range(0, len(P)):
         C[0] = 0
         for i in range(1, L+1):
-            min = sys.maxint
-            for k in range(0, j+1):
-                if P[k] <= i:
-                    temp = 1 + C[i-P[k]]
-                    if temp < min:
-                        min = temp
-            C[i] = min
+            if P[j] <= i:
+                C[i] = min(C[i], 1+ C[i-P[j]])
+
         #On imprime la ligne
-        C = map(lambda x: -1 if x == sys.maxint else x, C)
         print reduce(lambda x, y: x + " "+y,
                      map(lambda x: "{"+str(x)+":3}",
-                         range(0, len(C)))).format(*C).strip()
+                         range(0, len(C)))).format(*
+                                 map(lambda x: -1 if x == sys.maxint else x, C)).strip()
 
 def calculerC(M, P):
     """On retourne la dernière ligne de C pour la plus grande valeur de
-       contenue dans M
+       contenue dans M. Si la valeur de C est -1, il n'est pas possible de rendre
+       la monnaie exacte.
     """
 
     maxChange = reduce(lambda x, y: max(x, y), M)
-    C = [-1]*(maxChange+1)
+    C = [sys.maxint]*(maxChange+1)
     for j in range(0, len(P)):
         C[0] = 0
         for i in range(1, maxChange+1):
-            min = sys.maxint
-            for k in range(0, j+1):
-                if P[k] <= i:
-                    temp = 1 + C[i-P[k]]
-                    if temp < min:
-                        min = temp
-            C[i] = min
+            if P[j] <= i:
+                C[i] = min(C[i], 1+ C[i-P[j]])
 
     return map(lambda x: -1 if x == sys.maxint else x, C)
 

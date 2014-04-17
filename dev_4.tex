@@ -35,6 +35,7 @@
 %Pour INF4100 - devoir 4
 \usepackage{amsfonts}
 \usepackage{mathtools}
+\usepackage{multirow}
 
 \usepackage{afterpage}
 \usepackage{appendix}
@@ -176,14 +177,13 @@ C[i,1] =
 \end{equation}
 
 \subsection{Tableau C pour $P = [1, 5, 10, 25]$ et $L = 25$}
-
-$C = $
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-\hline
- 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 &14 & 15 & 16 & 17 & 18 & 19 & 20 \\ \hline
-0 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 5 & 2 & 3 & 4 & 5 & 6 & 3 & 4 & 5 & 6 & 7 & 4 \\ \hline
-0 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 5 & 1 & 2 & 3 & 4 & 5 & 2 & 3 & 4 & 5 & 6 & 2 \\ \hline
-0 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 5 & 1 & 2 & 3 & 4 & 5 & 2 & 3 & 4 & 5 & 6 & 2 \\ \hline
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\cline{2-22}
+ $j=$&  0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 &14 & 15 & 16 & 17 & 18 & 19 & 20 \\ \cline{2-22}
+\multirow{4}{*}{$C=$} & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 &14 & 15 & 16 & 17 & 18 & 19 & 20 \\ \cline{2-22}
+ & 0 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 5 & 2 & 3 & 4 & 5 & 6 & 3 & 4 & 5 & 6 & 7 & 4 \\ \cline{2-22}
+ & 0 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 5 & 1 & 2 & 3 & 4 & 5 & 2 & 3 & 4 & 5 & 6 & 2 \\ \cline{2-22}
+ & 0 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 5 & 1 & 2 & 3 & 4 & 5 & 2 & 3 & 4 & 5 & 6 & 2 \\ \cline{2-22}
 \end{tabular}
 
 \subsection{Équation de récurrence pour C[i, j]}
