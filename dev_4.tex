@@ -201,7 +201,7 @@ C[i,1] =
 
 \subsection{Algorithme de programmation dynamique utilisant un tableau en une dimension}
 
-Source: \url{http://www.columbia.edu/~cs2035/courses/csor4231.F07/dynamic.pdf}
+Source: \url{}
 
 \begin{algorithm}
  \SetKwInput{Fonction}{fonction}
@@ -209,24 +209,20 @@ Source: \url{http://www.columbia.edu/~cs2035/courses/csor4231.F07/dynamic.pdf}
  \SetKwInput{Antecedents}{antécédents}
  \SetKwInput{Consequents}{conséquents}
   \Fonction{monnaieOptimale ($P, L$)}
- \Donnees{ \emph{P}: tableau des pièces de monnaie n*n indicé de 1 à $n$ \\ 
+ \Donnees{ \emph{P}: tableau des pièces de monnaie indicé de 1 à $n$ \\ 
 	   \emph{L}: la monnaie à rendre}
  \Sortie{ \emph{C}: le tableau de la monnaie optimale de 0 à $L$}
  \Deb{
-    créer tableau $C$ de longueur $L+1$\\
-    \Pour{$i \longleftarrow 0$ à $L$}{
-      \Si{$i \bmod P[1] == 0$}{
-	$C[i] \longleftarrow i / P[1]$}
-      \Sinon{
-	$C[i] \longleftarrow \infty$}}
-    \Pour{$i \longleftarrow 2$ à $n$}{
-      \Pour{$k \longleftarrow 1$ à $L$}{
-	\Si{$k \ge P[i]$}{
-	  $C[k] \longleftarrow min(C[k-P[i]]+1, C[k])$
-	  }
+    créer tableau $C$ de longueur $L+1$ et initialiser les valeurs à $\infty$\\
+    \Pour{$j \longleftarrow 1$ à $n$}{
+      $C[0] = 0$\\
+      \Pour{$i \longleftarrow 1$ à $L$}{
+	\Si{$P[j] \le i$}{
+	  $C[i] \longleftarrow min(C[i], 1 + C[i-P[j]])$
 	}
       }
-    }       
+    }
+  }     
 \end{algorithm}
 
 \subsection{Complexité temporelle}
@@ -234,12 +230,13 @@ Source: \url{http://www.columbia.edu/~cs2035/courses/csor4231.F07/dynamic.pdf}
 La complexité dépend du nombre de pièces disponibles pour faire la monnaie, et $L$, la monnaie
 à rendre.
 
-Pour chaque valeur du tableau de $L$, on essaie de faire la monnaie avec chaque pièce.
-S'il y a $n$ pièces de monnaie disponibles, on a donc $n$ boucles pour chaque élément du
-tableau $C$.
+On a deux boucles. On boucle tout d'abord sur les pièces, il y a donc $n$ itérations.
+À chaque itération, on vérifie pour chaque valeur de $0$ à $L$ si on a une meilleure solution.
+Donc, on a pour cette boucle intérieure on a $L$ itérations. 
 
-Donc, l'algorithme à une complexité temporelle de $\Theta(nL)$.
-
+On fait un nombre constant d'opérations à l'intérieur des deux boucles. Donc, 
+l'algorithme à une complexité temporelle de $\Theta(nL)$.
+\newpage
 \subsection{Algorithme glouton capable de faire la monnaie}
 
 \begin{algorithm}
@@ -247,7 +244,7 @@ Donc, l'algorithme à une complexité temporelle de $\Theta(nL)$.
  \SetKwInput{Donnees}{donnees}
  \SetKwInput{Antecedents}{antécédents}
  \SetKwInput{Consequents}{conséquents}
-  \Fonction{trouverChangeOptimale ($P, C, M$)}
+  \Fonction{trouverChangeOptimale ($P, L, C$)}
  \Donnees{ \emph{P}: tableau des pièces de monnaie indicé de 1 à $n$ \\ 
 	   \emph{L}: la monnaie à rendre\\
 	   \emph{C}: le tableau de la monnaie optimale de 0 à $L$}
@@ -257,9 +254,9 @@ Donc, l'algorithme à une complexité temporelle de $\Theta(nL)$.
  \Deb{
   Créer un tableau $S$ de longueur $n$, et initialiser toutes les valeurs à $0$\\
   $i \longleftarrow n$\\
-  \Tq{$M > 0$}{
-    \Si{$C[M] \ge P[i]$ et $C[M-P[i]] < C[M]$}{
-      $M \longleftarrow M - P[i]$\\
+  \Tq{$L > 0$}{
+    \Si{$L \ge P[i]$ et $C[L] = 1 + C[L-P[i]]$}{
+      $L \longleftarrow L - P[i]$\\
       $S[i] \longleftarrow S[i] + 1$\\
       }
     \Sinon{
@@ -272,16 +269,14 @@ Donc, l'algorithme à une complexité temporelle de $\Theta(nL)$.
 
 \subsection{Complexité temporelle de l'algorithme précédent}
 
-On connait ici le nombre de boucles maximales pour l'algorithme: on sait qu'il y 
-a au pire $C[M]$ boucles, car il s'agit du nombre de pièces optimales de monnaie
-à rendre.
+On peut d'abord étudier le pire cas cet algorithme. Cela se produit lorsqu'on fait le 
+nombre maximale de la boucle Tant que.
 
-On vérifie ensuite quelle pièce utilisée pour continuer d'être dans la solution
-optimale. Dans le pire cas, il faut donc tenter toutes les pièces avant de
-trouver la pièce à utiliser, donc $n$ tours de boucle.
+Dans ce cas, on fait $n + \frac{L}{P_1}$ tours de boucle: la monnaie maximale contient $L$ pièces
+de valeur $P_1$. On a donc vérifier toutes les pièces de plus grande valeur que $P_1$, ensuite
+on va itérer jusqu'à ce que $L$ soit égale à 0, donc dans ce cas $\frac{L}{P_1}$. 
 
-La complexité temporelle est donc $\Theta(C[M]n)$, est comme $C[M]$ est une constante,
-la complexité est donc $\Theta(n)$.
+La complexité temporelle du pire cas est donc $\Theta(n + L)$.
 
 
 \end{document}
