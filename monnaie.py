@@ -107,6 +107,8 @@ def main():
 
     P, Monnaies = lireFichier(fichier_defaut)
 
+    save_stdout  = sys.stdout
+    sys.stdout = open("resultat.txt", "w")
     #On imprime pour L = 20
     print reduce(lambda x, y: str(x) + " " + str(y), P)
     afficherC(20, P)
@@ -120,6 +122,10 @@ def main():
             print str(i) + " : Aucune solution possible"
         else:
             print str(i) + " : " + reduce(lambda x, y: str(x) + " " + str(y), S)
+
+    sys.stdout.close()
+    sys.stdout = save_stdout
+
 
 if __name__ == "__main__":
         main()
