@@ -5,7 +5,7 @@
     monnaie.py
     Par Guillaume Lahaie
     LAHG04077707
-    Dernière mise à jour: 10 avril 2014
+    Dernière mise à jour: 17 avril 2014
 
     Implémentation de l'algorithme de monnaie. Pour le moment je suppose
     qu'il est possible de rendre la monnaie pour tous les montants possibles
@@ -14,8 +14,6 @@
 """
 
 import sys
-
-
 
 def afficherC(L, P):
     """
@@ -41,8 +39,7 @@ def calculerC(M, P):
        contenue dans M. Si la valeur de C est -1, il n'est pas possible de rendre
        la monnaie exacte.
     """
-
-    maxChange = reduce(lambda x, y: max(x, y), M)
+    maxChange = max(M)
     C = [sys.maxint]*(maxChange+1)
     for j in range(0, len(P)):
         C[0] = 0
@@ -65,17 +62,28 @@ def lireFichier(nom_fichier):
                        map(lambda x: x.strip(),
                            f.readline().strip().split(" "))))
 
-        assert (len(P) == no_pieces),"Erreur de dimensions dans le fichier " + nom_fichier
+        assert (len(P) == no_pieces),\
+                "Erreur de dimensions dans le fichier " + nom_fichier
+
         no_monnaie = int(f.readline().strip())
         Monnaies = map(lambda x: int(x),
                 filter(lambda x: x != "",
                        map(lambda x: x.strip(),
                            f.readline().strip().split(" "))))
-        assert (len(Monnaies) == no_monnaie),"Erreur de dimensions dans le fichier " + nom_fichier
+
+        assert (len(Monnaies) == no_monnaie),\
+                "Erreur de dimensions dans le fichier " + nom_fichier
 
     return P, Monnaies
 
 def trouverMonnaieOptimale(C, monnaie, P):
+    """Retourne un tableau contenant, en ordre décroissant, le nombre de
+       pièces de chaque dénomination de la solution optimale pour monnaie.
+       S'il est impossible de rendre la monnaie exacte, on retourne un
+       tableau contenant des nombres négatifs.
+
+       On assume ici que monnaie <= L.
+    """
 
     S = [0]*len(P)
     if C[monnaie] < 0:
