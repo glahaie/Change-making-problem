@@ -176,10 +176,9 @@ C[i,1] =
 \end{cases}
 \end{equation}
 
-\subsection{Tableau C pour $P = [1, 5, 10, 25]$ et $L = 25$}
+\subsection{Tableau C pour $P = [1, 5, 10, 25]$ et $L = 20$}
 \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-\cline{2-22}
- $j=$&  0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 &14 & 15 & 16 & 17 & 18 & 19 & 20 \\ \cline{2-22}
+\cline{2-22} 
 \multirow{4}{*}{$C=$} & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 &14 & 15 & 16 & 17 & 18 & 19 & 20 \\ \cline{2-22}
  & 0 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 5 & 2 & 3 & 4 & 5 & 6 & 3 & 4 & 5 & 6 & 7 & 4 \\ \cline{2-22}
  & 0 & 1 & 2 & 3 & 4 & 1 & 2 & 3 & 4 & 5 & 1 & 2 & 3 & 4 & 5 & 2 & 3 & 4 & 5 & 6 & 2 \\ \cline{2-22}
@@ -280,7 +279,9 @@ on va itérer jusqu'à ce que $L$ soit égale à 0, donc dans ce cas $\frac{L}{P
 La complexité temporelle du pire cas est donc $\Theta(n + L)$.
 
 Dans le meilleur cas, on a seulement besoin des pièces $P_n$ pour faire la monnaie. Il n'est donc
-pas nécessaire de tester les autres pièces.
+pas nécessaire de tester les autres pièces. Il y a donc $\frac{L}{P_n}$ pièces de valeur $P_n$, et
+donc $\frac{L}{P_n}$ itérations de la boucle. Donc dans ce cas, la complexité temporelle est
+$\Theta(L)$
 
 
 \end{document}
