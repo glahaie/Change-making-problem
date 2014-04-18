@@ -201,8 +201,6 @@ C[i,1] =
 
 \subsection{Algorithme de programmation dynamique utilisant un tableau en une dimension}
 
-Source: \url{}
-
 \begin{algorithm}
  \SetKwInput{Fonction}{fonction}
  \SetKwInput{Donnees}{donnees}
@@ -212,6 +210,7 @@ Source: \url{}
  \Donnees{ \emph{P}: tableau des pièces de monnaie indicé de 1 à $n$ \\ 
 	   \emph{L}: la monnaie à rendre}
  \Sortie{ \emph{C}: le tableau de la monnaie optimale de 0 à $L$}
+   \Antecedents{$P[1] \le P[2] \le ... \le P[n]$}
  \Deb{
     créer tableau $C$ de longueur $L+1$ et initialiser les valeurs à $\infty$\\
     \Pour{$j \longleftarrow 1$ à $n$}{
@@ -249,8 +248,10 @@ l'algorithme à une complexité temporelle de $\Theta(nL)$.
 	   \emph{L}: la monnaie à rendre\\
 	   \emph{C}: le tableau de la monnaie optimale de 0 à $L$}
   \Antecedents{$M \le L$\\
-	       $P[1] \le P[2] \le ... \le P[n]$}
- \Sortie{$S$, tableau contenant le nombre de pièces à rendre pour chaque pièce de monnaie}
+	       $P[1] \le P[2] \le ... \le P[n]$\\
+	       Il existe une solution pour monnaie $(C[monnaie] \neq \infty)$}
+ \Sortie{$S$, tableau contenant le nombre de pièces à rendre pour chaque pièce de monnaie, $S[0]$ représente
+	  le nombre de pièces de $P[0]$ nécessaires, etc.}
  \Deb{
   Créer un tableau $S$ de longueur $n$, et initialiser toutes les valeurs à $0$\\
   $i \longleftarrow n$\\
@@ -277,6 +278,9 @@ de valeur $P_1$. On a donc vérifier toutes les pièces de plus grande valeur qu
 on va itérer jusqu'à ce que $L$ soit égale à 0, donc dans ce cas $\frac{L}{P_1}$. 
 
 La complexité temporelle du pire cas est donc $\Theta(n + L)$.
+
+Dans le meilleur cas, on a seulement besoin des pièces $P_n$ pour faire la monnaie. Il n'est donc
+pas nécessaire de tester les autres pièces.
 
 
 \end{document}

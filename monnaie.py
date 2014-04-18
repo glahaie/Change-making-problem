@@ -34,16 +34,15 @@ def afficherC(L, P):
                          range(0, len(C)))).format(*
                                  map(lambda x: -1 if x == sys.maxint else x, C)).strip()
 
-def calculerC(M, P):
-    """On retourne la dernière ligne de C pour la plus grande valeur de
-       contenue dans M. Si la valeur de C est -1, il n'est pas possible de rendre
+def calculerC(L, P):
+    """On retourne la dernière ligne de C pour la valeur L.
+       Si la valeur de C est -1, il n'est pas possible de rendre
        la monnaie exacte.
     """
-    maxChange = max(M)
-    C = [sys.maxint]*(maxChange+1)
+    C = [sys.maxint]*(L+1)
     for j in range(0, len(P)):
         C[0] = 0
-        for i in range(1, maxChange+1):
+        for i in range(1, L+1):
             if P[j] <= i:
                 C[i] = min(C[i], 1+ C[i-P[j]])
 
@@ -112,7 +111,7 @@ def main():
     print reduce(lambda x, y: str(x) + " " + str(y), P)
     afficherC(20, P)
 
-    C = calculerC(Monnaies, P)
+    C = calculerC(max(Monnaies), P)
 
     print "\nMontant: nombre de pièces en ordre décroissant de valeur"
     for i in Monnaies:
