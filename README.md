@@ -10,23 +10,23 @@ implemented to find the best solution.
 The application takes one optional argument: a file name containing the coins
 and the change to calculate. The file must be in the form:
 
-'''
+```
 Number of coins
 Values of coins
 Number of values of change
 Values of change
-'''
+```
 
 An example is:
 
-'''
+```
 4
 1 5 10 25
 3
 30 85 123
-'''
+```
 
-If no argument is given, the application uses the file 'monnaie.txt'. The latex
+If no argument is given, the application uses the file `monnaie.txt`. The latex
 file contains an analysis of the complexity of the algorithms.
 
 ---
